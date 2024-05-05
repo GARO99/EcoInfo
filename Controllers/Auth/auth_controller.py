@@ -40,7 +40,7 @@ async def sign_in(
 @inject
 async def sign_up(
     user_data: User_schema,
-    service: Authentication_service = Depends(Provide[Container.authentication_use_case])
+    service: Authentication_service = Depends(Provide[Container.authentication_service])
 ):
     return service.sign_up(user_data)
 
@@ -49,7 +49,7 @@ async def sign_up(
 @inject
 async def sign_out(
     token: Annotated[str, Depends(Project_config.OAUTH2_SCHEME())],
-    service: Authentication_service = Depends(Provide[Container.authentication_use_case])
+    service: Authentication_service = Depends(Provide[Container.authentication_service])
 ):
     return service.sign_out(token)
 
