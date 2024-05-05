@@ -6,6 +6,8 @@ from dependency_injector.wiring import Provide, inject
 from Continair.container import Container
 from Models.Company.company import Company
 from Models.User.user import User
+from Schemas.Company.Company_schema import Company_Schema
+from Services.Company.Company_service import Company_service
 
 
 company_router = APIRouter(
@@ -19,40 +21,48 @@ auth_service = container.authentication_service()
 
 @company_router.get("/", response_model=list[Company])
 @inject
-async def get_all():
-    pass
+async def get_all(
+    service: Company_service= Depends(Provide[Container.company_service])
+):
+    return service.get_all()
 
 
 @company_router.get("/{id}", response_model=Company)
 @inject
 async def get_by_id(
-    id: uuid.UUID
+    id: uuid.UUID,
+    service: Company_service= Depends(Provide[Container.company_service])
 ):
-    pass
+    return service.get_by_id(id)
 
 
 @company_router.post("/", response_model=Company)
 @inject
 async def create(
-    user: Annotated[User, Depends(auth_service.check_session)]
+    data: Company_Schema,
+    user: Annotated[User, Depends(auth_service.check_session)],
+    service: Company_service= Depends(Provide[Container.company_service])
 ):
-    pass
+    return service.create(data)
 
 
 @company_router.put("/", response_model=Company)
 @inject
 async def update(
-    user: Annotated[User, Depends(auth_service.check_session)]
+    data: Company_Schema,
+    user: Annotated[User, Depends(auth_service.check_session)],
+    service: Company_service= Depends(Provide[Container.company_service])
 ):
-    pass
+    return service.update(data)
 
 
 @company_router.delete("/{id}", status_code=204)
 @inject
 async def delete(
     id: uuid.UUID,
-    user: Annotated[User, Depends(auth_service.check_session)]
+    user: Annotated[User, Depends(auth_service.check_session)],
+    service: Company_service= Depends(Provide[Container.company_service])
 ):
-    pass
+    return service.delete(id)
 
 
