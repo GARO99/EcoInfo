@@ -1,4 +1,5 @@
 import os
+from fastapi.security import OAuth2PasswordBearer
 from pydantic_settings import BaseSettings
 
 
@@ -30,6 +31,20 @@ class Project_config(BaseSettings):
     @staticmethod
     def BACKEND_CORS_ORIGINS() -> list[str]:
         return ["*"]
+
+    @staticmethod
+    def SECRET_KEY() -> str:
+        return "babcc327dfcc794927837331ef941c79d92165f075fb2653f6e41a7ce86fb2eb"
+
+
+    @staticmethod
+    def ALGORITHM() -> str:
+        return "HS256"
+
+
+    @staticmethod
+    def OAUTH2_SCHEME() -> OAuth2PasswordBearer:
+        return OAuth2PasswordBearer(tokenUrl="/api/auth/signIn")
 
 
     @property

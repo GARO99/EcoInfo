@@ -8,6 +8,7 @@ from sqlmodel import SQLModel
 
 from Models.User.user import User
 from Models.Suggestion.suggestion import Suggestion
+from Models.Token.token_blacklist import Token_blacklist
 from Models.Company.company_type import Company_Type
 from Models.Company.company import Company
 from Models.Store.store import Store
