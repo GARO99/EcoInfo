@@ -63,7 +63,7 @@ class SqlAlchemyGenericRepository(AbcGenericRepository, Generic[Entity]):
 
 
     def update(
-        self, id: uuid.UUID, 
+        self,
         entity: Entity
     ):
         non_null_data = {
@@ -72,9 +72,9 @@ class SqlAlchemyGenericRepository(AbcGenericRepository, Generic[Entity]):
         }
 
         with self.db_context.session() as session:
-            session.query(self.entity).filter(self.entity.id == id).update(non_null_data)
+            session.query(self.entity).filter(self.entity.id == entity.id).update(non_null_data)
             session.commit()
-            return self.read_by_id(id)
+            return self.read_by_id(entity.id)
 
 
     def delete_by_id(self, id: uuid.UUID):

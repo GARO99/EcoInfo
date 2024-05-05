@@ -14,4 +14,4 @@ class Company(Base_Model, table=True):
     company_type_id: uuid.UUID = Field(default=None, nullable=False, foreign_key="company_type.id")
 
     company_type: Optional[Company_Type] = Relationship(back_populates="companys")
-    stores: list["Store"] = Relationship(back_populates="company")
+    #stores: list["Store"] = Relationship(back_populates="company")

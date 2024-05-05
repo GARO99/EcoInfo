@@ -38,7 +38,6 @@ class AbcGenericRepository(ABC, Generic[Entity]):
     @abstractmethod
     def update(
         self,
-        id: uuid.UUID,
         entity: type[Entity]
     ):
         pass

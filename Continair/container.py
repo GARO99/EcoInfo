@@ -1,11 +1,13 @@
 from dependency_injector import containers, providers
 
 from Config.project_config import Project_config
+from Models.Company.company_type import Company_Type
 from Models.Context.sqlalchemy_context import SqlalchemyContext
 from Models.Repository.sqlalchemy_generic_repository import SqlAlchemyGenericRepository
 from Models.Token.token_blacklist import Token_blacklist
 from Models.User.user import User
 from Services.Auth.authentication_service import Authentication_service
+from Services.Company.Company_type_service import Company_type_service
 from Services.Cryptography.token_service import Token_service
 from Services.User.user_service import User_service
 
@@ -13,7 +15,9 @@ from Services.User.user_service import User_service
 class Container(containers.DeclarativeContainer):
     wiring_config = containers.WiringConfiguration(
         modules=[
-            "Controllers.Auth.auth_controller"
+            "Controllers.Auth.auth_controller",
+            "Controllers.Company.Company_controller",
+            "Controllers.Company.Company_type_controller"
         ]
     )
     
@@ -50,4 +54,16 @@ class Container(containers.DeclarativeContainer):
         Authentication_service,
         user_service=user_service,
         token_service=token_service
+    )
+
+
+    generic_repository_company_type = providers.Factory(
+        SqlAlchemyGenericRepository,
+        db_context=db.provided,
+        entity=Company_Type
+    )
+
+    company_type_service = providers.Factory(
+        Company_type_service,
+        repository=generic_repository_company_type
     )
