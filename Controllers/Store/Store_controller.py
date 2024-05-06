@@ -4,8 +4,10 @@ from fastapi import APIRouter, Depends
 from dependency_injector.wiring import Provide, inject
 
 from Continair.container import Container
+from Models.Product.product_store import Product_store
 from Models.Store.store import Store
 from Models.User.user import User
+from Schemas.Product.Product_store_schema import Product_store_schema
 from Schemas.Store.Store_schema import Store_schema
 from Services.Store.Store_service import Store_service
 
@@ -44,6 +46,16 @@ async def create(
     service: Store_service = Depends(Provide[Container.store_service])
 ):
     return service.create(data)
+
+
+@store_router.post("/add/products", response_model=Product_store)
+@inject
+async def add_products(
+    data: Product_store_schema,
+    user: Annotated[User, Depends(auth_service.check_session)],
+    service: Store_service = Depends(Provide[Container.store_service])
+):
+    return service.add_product(data)
 
 
 @store_router.patch("/", response_model=Store)

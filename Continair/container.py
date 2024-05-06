@@ -6,6 +6,7 @@ from Models.Company.company_type import Company_Type
 from Models.Context.sqlalchemy_context import SqlalchemyContext
 from Models.Product.product import Product
 from Models.Product.product_category import Product_category
+from Models.Product.product_store import Product_store
 from Models.Repository.sqlalchemy_generic_repository import SqlAlchemyGenericRepository
 from Models.Store.store import Store
 from Models.Suggestion.suggestion import Suggestion
@@ -125,9 +126,17 @@ class Container(containers.DeclarativeContainer):
         entity=Store
     )
 
+    generic_repository_product_store = providers.Factory(
+        SqlAlchemyGenericRepository,
+        db_context=db.provided,
+        entity=Product_store
+    )
+
     store_service = providers.Factory(
         Store_service,
-        repository=generic_repository_store
+        store_repository=generic_repository_store,
+        product_store_repository=generic_repository_product_store,
+        product_service=product_service
     )
 
 

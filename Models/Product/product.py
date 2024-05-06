@@ -15,4 +15,4 @@ class Product(Base_Model, table=True):
     product_category_id: uuid.UUID = Field(default=None, nullable=False, foreign_key="product_category.id")
 
     product_category: Optional[Product_category] = Relationship(back_populates="products")
-    #product_stores: list["Product_store"] = Relationship(back_populates="product")
+    product_stores: list["Product_store"] = Relationship(back_populates="product")
