@@ -45,7 +45,7 @@ async def create(
     return service.create(data)
 
 
-@company_type_router.put("/", response_model=Company_Type)
+@company_type_router.patch("/", response_model=Company_Type)
 @inject
 async def update(
     data: Company_Type_Schema,
