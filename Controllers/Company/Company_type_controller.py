@@ -12,7 +12,7 @@ from Services.Company.Company_type_service import Company_type_service
 
 company_type_router = APIRouter(
     prefix="/companytype",
-    tags=["company_type"],
+    tags=["Company Type"],
 )
 
 container = Container()

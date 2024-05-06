@@ -12,7 +12,7 @@ from Services.Company.Company_service import Company_service
 
 company_router = APIRouter(
     prefix="/company",
-    tags=["company"],
+    tags=["Company"],
 )
 
 container = Container()
@@ -64,5 +64,3 @@ async def delete(
     service: Company_service= Depends(Provide[Container.company_service])
 ):
     return service.delete(id)
-
-

@@ -15,7 +15,7 @@ from Services.Auth.authentication_service import Authentication_service
 
 auth_router = APIRouter(
     prefix="/auth",
-    tags=["auth"],
+    tags=["Auth"],
 )
 
 container = Container()

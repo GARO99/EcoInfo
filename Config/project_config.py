@@ -1,9 +1,13 @@
 import os
+from dotenv import load_dotenv
 from fastapi.security import OAuth2PasswordBearer
 from pydantic_settings import BaseSettings
 
 
 env_path = '../.env'
+
+load_dotenv(dotenv_path=env_path)
+
 
 class Project_config(BaseSettings):
     # database
