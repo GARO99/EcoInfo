@@ -7,6 +7,7 @@ from Models.Context.sqlalchemy_context import SqlalchemyContext
 from Models.Product.product import Product
 from Models.Product.product_category import Product_category
 from Models.Repository.sqlalchemy_generic_repository import SqlAlchemyGenericRepository
+from Models.Store.store import Store
 from Models.Token.token_blacklist import Token_blacklist
 from Models.User.user import User
 from Services.Auth.authentication_service import Authentication_service
@@ -15,6 +16,7 @@ from Services.Company.Company_type_service import Company_type_service
 from Services.Cryptography.token_service import Token_service
 from Services.Product.Product_category_service import Product_category_service
 from Services.Product.Product_service import Product_service
+from Services.Store.Store_service import Store_service
 from Services.User.user_service import User_service
 
 
@@ -25,7 +27,8 @@ class Container(containers.DeclarativeContainer):
             "Controllers.Company.Company_controller",
             "Controllers.Company.Company_type_controller",
             "Controllers.Product.Product_category_controller",
-            "Controllers.Product.Product_controller"
+            "Controllers.Product.Product_controller",
+            "Controllers.Store.Store_controller",
         ]
     )
     
@@ -110,4 +113,16 @@ class Container(containers.DeclarativeContainer):
     product_service = providers.Factory(
         Product_service,
         repository=generic_repository_product
+    )
+
+
+    generic_repository_store = providers.Factory(
+        SqlAlchemyGenericRepository,
+        db_context=db.provided,
+        entity=Store
+    )
+
+    store_service = providers.Factory(
+        Store_service,
+        repository=generic_repository_store
     )
