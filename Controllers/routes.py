@@ -5,6 +5,7 @@ from Controllers.Company.Company_type_controller import company_type_router
 from Controllers.Product.Product_category_controller import product_category_router
 from Controllers.Product.Product_controller import product_router
 from Controllers.Store.Store_controller import store_router
+from Controllers.Suggestion.Suggestion_controller import suggestion_router
 
 routers = APIRouter()
 router_list = [
@@ -13,7 +14,8 @@ router_list = [
     company_type_router,
     product_category_router,
     product_router,
-    store_router
+    store_router,
+    suggestion_router
 ]
 
 
