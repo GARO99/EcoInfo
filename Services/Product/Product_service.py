@@ -15,13 +15,13 @@ class Product_service():
 
 
     def get_all(self)-> list[Product]:
-        return self.repository.read_by_options()
+        return self.repository.read_by_options(include_propiertys="product_category")
 
 
     def get_by_id(self, id: uuid.UUID) -> Product:
         Uuid_helper.check_valid_uuid(id)
         
-        return self.repository.read_by_id(id)
+        return self.repository.read_by_id(id, "product_category")
 
 
     def create(self, data: Product_schema) -> Product:
