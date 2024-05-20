@@ -8,6 +8,7 @@ from Models.Product.product_store import Product_store
 from Models.Store.store import Store
 from Models.User.user import User
 from Schemas.Product.Product_store_schema import Product_store_schema
+from Schemas.Store.Store_response_schema import Store_response_schema
 from Schemas.Store.Store_schema import Store_schema
 from Services.Store.Store_service import Store_service
 
@@ -21,7 +22,7 @@ container = Container()
 auth_service = container.authentication_service()
 
 
-@store_router.get("/", response_model=list[Store])
+@store_router.get("/", response_model=list[Store_response_schema])
 @inject
 async def get_all(
     service: Store_service = Depends(Provide[Container.store_service])
@@ -29,7 +30,7 @@ async def get_all(
     return service.get_all()
 
 
-@store_router.get("/{id}", response_model=Store)
+@store_router.get("/{id}", response_model=Store_response_schema)
 @inject
 async def get_by_id(
     id: uuid.UUID,

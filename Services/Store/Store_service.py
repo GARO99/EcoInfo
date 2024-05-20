@@ -25,13 +25,13 @@ class Store_service():
 
 
     def get_all(self)-> list[Store]:
-        return self.store_repository.read_by_options()
+        return self.store_repository.read_by_options(include_propiertys="company")
 
 
     def get_by_id(self, id: uuid.UUID) -> Store:
         Uuid_helper.check_valid_uuid(id)
         
-        return self.store_repository.read_by_id(id)
+        return self.store_repository.read_by_id(id, "company")
 
 
     def create(self, data: Store_schema) -> Store:
