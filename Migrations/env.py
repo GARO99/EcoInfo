@@ -15,6 +15,7 @@ from Models.Store.store import Store
 from Models.Product.product_category import Product_category
 from Models.Product.product import Product
 from Models.Product.product_store import Product_store
+from Models.Plant.plant import Plant
 
 
 from Config.project_config import Project_config
