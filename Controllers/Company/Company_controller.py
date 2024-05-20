@@ -6,6 +6,7 @@ from dependency_injector.wiring import Provide, inject
 from Continair.container import Container
 from Models.Company.company import Company
 from Models.User.user import User
+from Schemas.Company.Company_response_schema import Company_Response_Schema
 from Schemas.Company.Company_schema import Company_Schema
 from Services.Company.Company_service import Company_service
 
@@ -19,7 +20,7 @@ container = Container()
 auth_service = container.authentication_service()
 
 
-@company_router.get("/", response_model=list[Company])
+@company_router.get("/", response_model=list[Company_Response_Schema])
 @inject
 async def get_all(
     service: Company_service= Depends(Provide[Container.company_service])
@@ -27,7 +28,7 @@ async def get_all(
     return service.get_all()
 
 
-@company_router.get("/{id}", response_model=Company)
+@company_router.get("/{id}", response_model=Company_Response_Schema)
 @inject
 async def get_by_id(
     id: uuid.UUID,

@@ -15,13 +15,13 @@ class Company_service():
 
 
     def get_all(self)-> list[Company]:
-        return self.repository.read_by_options()
+        return self.repository.read_by_options(include_propiertys="company_type")
 
 
     def get_by_id(self, id: uuid.UUID) -> Company:
         Uuid_helper.check_valid_uuid(id)
         
-        return self.repository.read_by_id(id)
+        return self.repository.read_by_id(id, "company_type")
 
 
     def create(self, data: Company_Schema) -> Company:
